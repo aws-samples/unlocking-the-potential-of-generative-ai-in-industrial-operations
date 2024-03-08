@@ -1,0 +1,517 @@
+example1:
+  question: list all unique sensors
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        unique_names = df['sensorname'].unique()
+        return {'type': 'list', 'value': list(unique_names)}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example2:
+  question: list all unique assets
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        unique_names = df['assetname'].unique()
+        return {'type': 'list', 'value': list(unique_names)}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example3:
+  question: list all unique sites
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        unique_sites = df['sitename'].unique()
+        return {'type': 'list', 'value': list(unique_sites)}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example4:
+  question: tell me the total number of unique sensors, and provide the answer in one sentence
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        num_unique_sensors = df['sensorname'].nunique()
+        output = f'There are {num_unique_sensors} unique sensors.'
+        return {'type': 'string', 'value': output}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example5:
+  question: tell me the total number of unique sites, and provide the answer in one sentence
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        num_unique_sites = df['sitename'].nunique()
+        output = f'There are {num_unique_sites} unique sites.'
+        return {'type': 'string', 'value': output}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example6:
+  question: tell me the total number of unique assets, and provide the answer in one sentence
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        num_unique_assets = df['assetname'].nunique()
+        output = f'There are {num_unique_assets} unique sites.'
+        return {'type': 'string', 'value': output}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example7:
+  question: list number of sensors for each site
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        sensor_counts = df.groupby('sitename')['sensorname'].nunique()
+        return {'type': 'dataframe', 'value': sensor_counts}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example8:
+  question: what is the time duration of this dataset, and provide the answer in one sentence
+  python_code: |
+    def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+        df = dfs[0]
+        earliest_timestamp = df['timestamp'].min()
+        latest_timestamp = df['timestamp'].max()
+        result = f'The earliest timestamp is {earliest_timestamp} and the latest timestamp is {latest_timestamp}.'
+        return {'type': 'string', 'value': result}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example9:
+  question: For sensors shown vibrationML as NOT Healthy, can you tell me what is the average acceleration?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df_unhealthy = df[df['vibrationML'] != 'HEALTHY']
+        df_unhealthy = df_unhealthy[['timestamp', 'sensorname', 'sitename', 'acceleration']]
+        result = df_unhealthy.groupby('sensorname').acceleration.mean().reset_index()
+        return {'type': 'dataframe', 'value': result}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example10:
+  question: For sensors shown vibrationML as NOT Healthy, can you tell me what is the average velocity?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df_unhealthy = df[df['vibrationML'] != 'HEALTHY']
+        df_unhealthy = df_unhealthy[['timestamp', 'sensorname', 'sitename', 'velocity']]
+        result = df_unhealthy.groupby('sensorname').velocity.mean().reset_index()
+        return {'type': 'dataframe', 'value': result}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example11:
+  question: For sensors shown temperatureML as NOT Healthy, can you tell me what is the average temperature?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df_unhealthy = df[df['vibrationML'] != 'HEALTHY']
+        df_unhealthy = df_unhealthy[['timestamp', 'sensorname', 'sitename', 'temperature']]
+        result = df_unhealthy.groupby('sensorname').temperature.mean().reset_index()
+        return {'type': 'dataframe', 'value': result}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example12:
+  question: What is number of sensors at each site shown vibration signal in Warning, or Alarm status respectively?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        grouped = df[df['vibrationML'] != 'HEALTHY'].groupby(['sitename', 'vibrationML'])['sensorname'].nunique().reset_index()
+        pivot = grouped.pivot(index='sitename', columns='vibrationML', values='sensorname')
+        pivot = pivot.fillna(0)
+        return {'type': 'dataframe', 'value': pivot}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML  
+
+example13:
+  question: What percentage of sensors at each site shown vibration signal in Warning, or Alarm status?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        grouped = df[df['vibrationML'] != 'HEALTHY'].groupby(['sitename'])['sensorname'].nunique()
+        total_sensor_count = df.groupby('sitename')['sensorname'].nunique()
+        percent_in_warning = (grouped/total_sensor_count)*100
+        return {'type': 'dataframe', 'value': percent_in_warning}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML  
+
+example14:
+  question: What is number of sensors at each site shown temperature in Warning, or Alarm status respectively?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        grouped = df[df['temperatureML'] != 'HEALTHY'].groupby(['sitename', 'temperatureML'])['sensorname'].nunique().reset_index()
+        pivot = grouped.pivot(index='sitename', columns='temperatureML', values='sensorname')
+        pivot = pivot.fillna(0)
+        return {'type': 'dataframe', 'value': pivot}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example15:
+  question: What percentage of sensors at each site shown temperature as NOT healthy status?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        grouped = df[df['temperatureML'] != 'HEALTHY'].groupby(['sitename'])['sensorname'].nunique()
+        total_sensor_count = df.groupby('sitename')['sensorname'].nunique()
+        percent_in_warning = (grouped/total_sensor_count)*100
+        return {'type': 'dataframe', 'value': percent_in_warning}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example16:
+  question: For sensors shown vibration signal as NOT Healthy, can you calculate the time duration in days for each sensor shown abnormal vibrationML?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df = df[df['vibrationML'] != 'HEALTHY']
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df = df.sort_values(by=['timestamp'], ascending=False)
+        df['time_diff'] = df.groupby('sensorname')['timestamp'].transform(lambda x: x.iloc[0] - x.iloc[-1])
+        df['time_diff'] = df['time_diff'].dt.days
+        result_df = df.groupby('sensorname')['time_diff'].agg(['max'])
+        return {'type': 'dataframe', 'value': result_df}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+
+example17:
+  question: For sensors shown temperature as NOT Healthy, can you calculate the time duration in days for each sensor shown abnormal temperatureML?
+  python_code: |
+    def analyze_data(dfs):
+    df = dfs[0]
+    df = df[df['temperatureML'] != 'HEALTHY']
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df = df.sort_values(by=['timestamp'], ascending=False)
+    df['time_diff'] = df.groupby('sensorname')['timestamp'].transform(lambda x: x.iloc[0] - x.iloc[-1])
+    df['time_diff'] = df['time_diff'].dt.days
+    result_df = df.groupby('sensorname')['time_diff'].agg(['max'])
+    return {'type': 'dataframe', 'value': result_df}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML
+  
+example18:
+  question: What is number of sensors shown vibration in Not Healthy status at Site A monthly?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        site_a_df = df[(df['sitename'] == 'Site A') & (df['vibrationML'] != 'HEALTHY')]
+        site_a_df['year'] = site_a_df['timestamp'].dt.year
+        site_a_df['month'] = site_a_df['timestamp'].dt.month
+        monthly_sensor_counts = site_a_df.groupby(['year', 'month'])['sensorname'].nunique()
+        return {'type': 'dataframe', 'value': monthly_sensor_counts}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML   
+
+example19:
+  question: What is number of sensors shown temperature in Not Healthy status at Site A monthly?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        site_a_df = df[(df['sitename'] == 'Site A') & (df['temperatureML'] != 'HEALTHY')]
+        site_a_df['year'] = site_a_df['timestamp'].dt.year
+        site_a_df['month'] = site_a_df['timestamp'].dt.month
+        monthly_sensor_counts = site_a_df.groupby(['year', 'month'])['sensorname'].nunique()
+        return {'type': 'dataframe', 'value': monthly_sensor_counts}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example20:
+  question: What is percent change of number sensors showing vibrationML Not Healthy status for Site A monthly?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        site_a_df = df[(df['sitename'] == 'Site A') & (df['vibrationML'] != 'HEALTHY')]
+        site_a_df['year'] = site_a_df['timestamp'].dt.year
+        site_a_df['month'] = site_a_df['timestamp'].dt.month
+        monthly_sensor_counts = site_a_df.groupby(['year', 'month'])['sensorname'].nunique()
+        if len(monthly_sensor_counts) > 1:
+          monthly_percentage_change = monthly_sensor_counts.pct_change() * 100
+        return {'type': 'dataframe', 'value': monthly_percentage_change}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example21:
+  question: What is percent change of number sensors showing temperatureML Not Healthy status for Site A monthly?
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        site_a_df = df[(df['sitename'] == 'Site A') & (df['temperatureML'] != 'HEALTHY')]
+        site_a_df['year'] = site_a_df['timestamp'].dt.year
+        site_a_df['month'] = site_a_df['timestamp'].dt.month
+        monthly_sensor_counts = site_a_df.groupby(['year', 'month'])['sensorname'].nunique()
+        if len(monthly_sensor_counts) > 1:
+          monthly_percentage_change = monthly_sensor_counts.pct_change() * 100
+        else:
+          monthly_percentage_change = None
+        return {'type': 'dataframe', 'value': monthly_percentage_change}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example22:
+  question: List me all sensors with latest vibrationML status as NOT healthy
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df_sorted = df.sort_values('timestamp', ascending=False)
+        latest_records = df_sorted.drop_duplicates(subset = 'sensorname')
+        latest_unhealthy_sensors = latest_records[latest_records['vibrationML'] != 'HEALTHY']
+        return {'type': 'dataframe', 'value': latest_unhealthy_sensors}
+
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+
+example23:
+  question: List me all sensors with latest temperatureML status as NOT healthy
+  python_code: |
+    def analyze_data(dfs):
+        df = dfs[0]
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df_sorted = df.sort_values('timestamp', ascending=False)
+        latest_records = df_sorted.drop_duplicates(subset = 'sensorname')
+        latest_unhealthy_sensors = latest_records[latest_records['temperatureML'] != 'HEALTHY']
+        return {'type': 'dataframe', 'value': latest_unhealthy_sensors}
+        
+  column_info: |
+    column_info: |
+    timestamp
+    sitename
+    assetname
+    sensorname
+    temperature
+    acceleration
+    velocity
+    temperatureML
+    vibrationML 
+ 
