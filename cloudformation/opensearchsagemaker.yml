@@ -63,7 +63,7 @@ Resources:
     Type: AWS::SageMaker::CodeRepository
     Properties:
       GitConfig:
-          RepositoryUrl: https://github.com/3sudeesh10/Generative-AI-for-Next-Generation-IoT-Application
+          RepositoryUrl: https://github.com/aws-samples/unlocking-the-potential-of-generative-ai-in-industrial-operations
           SecretArn: !Ref GitHubRepoSecret
 
   S3Bucket:
