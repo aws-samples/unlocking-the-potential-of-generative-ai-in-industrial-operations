@@ -118,7 +118,7 @@ You can find the S3 bucket name from “Outputs” of the SFN stack.
 (1) setup AWS credential with AWS CLI on your local PC. If you are using a EC2, please attach a suitable IAM role to the instance.
 (2) Clone the GitHub repo: 
 ```sh
-git clone https://github.com/3sudeesh10/Industrial-Generative-AI-Analyzer.git
+git clone https://github.com/aws-samples/unlocking-the-potential-of-generative-ai-in-industrial-operations
 ```
 (3) Change directory to Industrial-Generative-AI-Analyzer/src, and run the setup.sh to install required packages, including LangChain, and PandasAI.
 ```sh
