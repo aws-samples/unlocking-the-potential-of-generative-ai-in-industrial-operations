@@ -120,9 +120,9 @@ You can find the S3 bucket name from “Outputs” of the SFN stack.
 ```sh
 git clone https://github.com/aws-samples/unlocking-the-potential-of-generative-ai-in-industrial-operations
 ```
-(3) Change directory to Industrial-Generative-AI-Analyzer/src, and run the setup.sh to install required packages, including LangChain, and PandasAI.
+(3) Change directory to unlocking-the-potential-of-generative-ai-in-industrial-operations/src, and run the setup.sh to install required packages, including LangChain, and PandasAI.
 ```sh
-cd Industrial-Generative-AI-Analyzer/src
+cd unlocking-the-potential-of-generative-ai-in-industrial-operations/src
 chmod +x ./setup.sh
 ./setup.sh   
 ```
