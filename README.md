@@ -84,9 +84,9 @@ aws cloudformation create-stack \
 
 #### Step 2: Run Sagemaker Notebook
 
-Open the SageMaker notebook instance created in step 1 in JupyterLab, and you will find the following Github repository already downloaded on this instance: Industrial-Generative-AI-Analyzer. Run the notebook from the following directory in this repository[Notebook:Ingest into OpenSearch](./SagemakerNotebook/nlq-vector-rag-embedding.ipynb): 
+Open the SageMaker notebook instance created in step 1 in JupyterLab, and you will find the following Github repository already downloaded on this instance: unlocking-the-potential-of-generative-ai-in-industrial-operations. Run the notebook from the following directory in this repository [Notebook:Ingest into OpenSearch](./SagemakerNotebook/nlq-vector-rag-embedding.ipynb): 
 
-Industrial-Generative-AI-Analyzer/SagemakerNotebook/nlq-vector-rag-embedding.ipynb
+unlocking-the-potential-of-generative-ai-in-industrial-operations/SagemakerNotebook/nlq-vector-rag-embedding.ipynb
 
 Please replace the CFN name to the name of the CFN from Step 1. 
 
