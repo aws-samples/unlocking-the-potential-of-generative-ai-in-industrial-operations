@@ -29,43 +29,15 @@ Parameters:
     Default: genai-monitron-nlq
     Type: String
     Description: Name of the vector index in the Amazon OpenSearch Service Serverless (AOSS) collection.
-  GitHubUsername:
-    Description: GitHub username
-    Default: Julia-Bobo-Hu
-    Type: String
-  GitHubToken:
-    Description: GitHub Token
-    Default: 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
-    Type: String
-   
-      
+         
 Resources:
-
-  GitHubRepoSecret:
-    Type: 'AWS::SecretsManager::Secret'
-    Properties:
-      Description: GitHub Sign In
-      SecretString: 
-        Fn::Join: 
-          - ''
-          - - '{'
-            - '"username":' 
-            - !Ref GitHubUsername
-            - ','
-            - '"password":'
-            - !Ref GitHubToken
-            - '}'
-      Tags:
-        - Key: Name
-          Value: !Ref 'AWS::StackName'
         
   CodeRepository:
     Type: AWS::SageMaker::CodeRepository
     Properties:
       GitConfig:
           RepositoryUrl: https://github.com/aws-samples/unlocking-the-potential-of-generative-ai-in-industrial-operations
-          SecretArn: !Ref GitHubRepoSecret
-
+          
   S3Bucket:
     Type: AWS::S3::Bucket
     Description: Creating Amazon S3 bucket to hold source data for knowledge base
